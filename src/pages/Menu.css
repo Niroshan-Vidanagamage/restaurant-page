@@ -1,4 +1,150 @@
+/* ==== your existing header styling ==== */
 .menu-page header {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../utils/img/menu-img.jpg);
-    height: 50vh;
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url(../utils/img/menu-img.jpg);
+  height: 50vh;
+  margin-top: 3rem;
+}
+
+/* Center header text */
+.menu-page header .container h1 {
+  color: #fff;
+  font-size: 3rem;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+
+/* ==== layout for menu + cart ==== */
+.menu-page {
+  display: flex;
+  gap: 2rem;
+}
+
+/* Left “menu” column takes 3 parts */
+.menu-list {
+  flex: 3;
+}
+
+/* Right “cart” sidebar */
+.cart-sidebar {
+  margin-top: 3rem;
+  max-width: 300px;
+
+  position: sticky;
+  top: 1rem;
+  height: calc(100vh - 2rem);
+
+  border-left: 1px solid #ddd;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  overflow-y: auto;
+}
+/* Make each cart row a flex container */
+.cart-sidebar .cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0.5rem;
+  border: none;
+  border-bottom: 1px solid #eee;
+}
+/* Remove bottom border on total row */
+.cart-sidebar .total-row {
+  border-bottom: none;
+  font-size: 1.1rem;
+}
+/* Cart heading */
+.cart-sidebar h3 {
+  margin-bottom: 1rem;
+}
+
+/* Left side: item name & section */
+.cart-sidebar .item-info {
+  /* allow this side to grow if needed */
+  flex: 1;
+}
+
+/* Right side: price & remove button */
+.cart-sidebar .item-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  /* prevent shrinking */
+  flex-shrink: 0;
+}
+
+/* Style each cart item */
+.cart-sidebar .list-group-item {
+  border: none;
+  border-bottom: 1px solid #eee;
+  padding: 0.75rem 0.5rem;
+}
+
+/* Remove bottom border on last item (total row) */
+.cart-sidebar .list-group-item:last-child {
+  border-bottom: none;
+}
+
+
+/* ==== Add-to-Cart hover behavior ==== */
+/* hide by default */
+.card .btn-add {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+/* show on card hover */
+.card:hover .btn-add {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* on touch devices, always show */
+@media (hover: none), (pointer: coarse) {
+  .card .btn-add {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+}
+
+
+/* ==== Responsive tweaks ==== */
+/* collapse layout below 992px */
+@media (max-width: 992px) {
+  .menu-page {
+    flex-direction: column;
+  }
+
+  .cart-sidebar {
+    max-width: none;
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-left: none;
+    border-top: 1px solid #ddd;
+    margin-top: 2rem;
+  }
+}
+
+/* ensure full-width cards below 576px */
+@media (max-width: 576px) {
+  .menu-list .card {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* (Optional) Right-align controls on very narrow screens */
+@media (max-width: 400px) {
+  .cart-sidebar .item-controls {
+    justify-content: flex-end;
+    width: 100px; /* or any fixed width */
+  }
 }
