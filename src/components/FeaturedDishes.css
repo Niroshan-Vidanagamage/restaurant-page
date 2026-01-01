@@ -1,0 +1,62 @@
+.featured-dishes-section {
+    background-color: #212529; /* Dark background to match other sections */
+    padding: 4rem 0;
+    overflow: hidden; /* Hide the scrollbar */
+}
+
+.scrolling-wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.scrolling-content {
+    display: flex;
+    animation: scroll 40s linear infinite;
+}
+
+.dish-link {
+    text-decoration: none;
+}
+
+.dish-card {
+    width: 250px;
+    margin: 0 1rem;
+    border: 1px solid #444;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dish-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    background-color: #fff !important;
+}
+
+.dish-card:hover .card-title,
+.dish-card:hover .text-success {
+    color: #000 !important;
+}
+
+.dish-card-img {
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Pause animation on hover */
+.scrolling-wrapper:hover .scrolling-content {
+    animation-play-state: paused;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* 
+         * We translate by half the width of the scrolling content.
+         * Since we duplicated the items, this creates a seamless loop.
+         * The total number of dishes is 12. Card width is 250px + 2rem (32px) margin.
+         * (250 + 32) * 12 = 3384px
+        */
+        transform: translateX(-3384px);
+    }
+}

@@ -5,6 +5,7 @@ import AboutImg from '../utils/img/about-img.jpg';
 import { Link } from 'react-router-dom';
 import { ImageGallery } from '../components/ImageGallery';
 import { ContactInfo } from '../components/ContactInfo';
+import { FeaturedDishes } from '../components/FeaturedDishes';
 import ContactImage from '../utils/img/contact-img.jpg';
 
 function Home() {
@@ -21,6 +22,8 @@ function Home() {
                     </div>
                 </div>
             </header>
+
+            <FeaturedDishes />
 
             <div className='container my-5'>
                 <div className='row'>

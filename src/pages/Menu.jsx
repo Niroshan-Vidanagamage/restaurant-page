@@ -11,45 +11,10 @@ import {
   ListGroupItem
 } from 'react-bootstrap';
 
-import BreakfastImg from '../utils/img/breakfast.jpg';
-import LunchImg     from '../utils/img/lunch.jpg';
-import DinnerImg    from '../utils/img/dinner.jpg';
-import DessertImg   from '../utils/img/dessert.jpg';
+import { menus } from './menuData';
+import Lottie from 'lottie-react'; // Import Lottie
+import WalletAnimation from '../utils/animations/Wallet.json'; // Assuming your animation file path
 
-const menus = {
-  Breakfast: {
-    items: [
-      { id: 1, name: 'English Breakfast', description: 'smoked bacon, sausage, tomato, mushrooms, black pudding, baked beans, eggs', price: 12 },
-      { id: 2, name: 'Avocado Toast',     description: 'poached egg, avocado, onion, tomatoes, bread', price: 8 },
-      { id: 3, name: 'Burrito',            description: 'tortilla, egg, cheese, potatoes, pork meat', price: 11 },
-    ],
-    img: BreakfastImg,
-  },
-  Lunch: {
-    items: [
-      { id: 1, name: 'Caesar Salad',         description: 'chicken breast, romaine lettuce, croutons, parmesan', price: 15 },
-      { id: 2, name: 'Spaghetti Carbonara',   description: 'spaghetti, pancetta, garlic, eggs, parmesan, pepper', price: 14 },
-      { id: 3, name: 'Pizza',                 description: 'chorizo, italian salami, tomatoes, mushrooms, olives', price: 12 },
-    ],
-    img: LunchImg,
-  },
-  Dinner: {
-    items: [
-      { id: 1, name: 'Spicy Beef',            description: 'spicy beef, potatoes, carrots, cheese sauce, spices', price: 17 },
-      { id: 2, name: 'Spaghetti Bolognese',   description: 'onion, carrot, celery, minced meat, spaghetti, parmesan', price: 15 },
-      { id: 3, name: 'Chickpea Curry',        description: 'onion, chickpea, garlic, mushrooms, tomatoes, spices', price: 12 },
-    ],
-    img: DinnerImg,
-  },
-  Dessert: {
-    items: [
-      { id: 1, name: 'Lemon Cake',      description: 'flour, sugar, baking powder, lemon', price: 9 },
-      { id: 2, name: 'Cinnamon Rolls',  description: 'flour, salt, sugar, cinnamon, yeast, sour cream, milk', price: 11 },
-      { id: 3, name: 'Vegan Pancakes',  description: 'flour, sugar, baking powder, soya milk, blueberries', price: 8 },
-    ],
-    img: DessertImg,
-  },
-};
 
 function Menu() {
   const navigate = useNavigate();
@@ -73,12 +38,24 @@ function Menu() {
     }
   }, [cart]);
 
+  // New state to control animation visibility
+  const [showCheckoutAnimation, setShowCheckoutAnimation] = useState(false);
+
   const addToCart = item => {
     setCart(prev => [...prev, item]);
   };
 
   const removeFromCart = index => {
     setCart(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const handleGoToCheckout = () => {
+    setShowCheckoutAnimation(true); // Show animation
+    // Play animation for 1 second, then navigate
+    setTimeout(() => {
+      setShowCheckoutAnimation(false); // Hide animation
+      navigate('/checkout', { state: { amount: total * 100 } }); // Navigate to payment page
+    }, 1000); // 1000 milliseconds = 1 second
   };
 
   const total = cart.reduce((sum, item) => sum + item.price, 0);
@@ -109,7 +86,7 @@ function Menu() {
 
                 <div className="col-lg-6 d-flex flex-column justify-content-around">
                   {items.map(item => (
-                    <Card
+                    <Card id={`${section.toLowerCase()}-${item.id}`}
                       key={item.id}
                       className={`border-0 ${
                         section === 'Lunch' || section === 'Dessert'
@@ -189,6 +166,8 @@ function Menu() {
                variant="primary"
                size="lg"
                onClick={() => navigate('/checkout', {state : {amount: total *100}})}
+               onClick={handleGoToCheckout} // Use the new handler
+               disabled={showCheckoutAnimation} // Disable button during animation
              >
                Go to Checkout
              </Button>
@@ -196,6 +175,18 @@ function Menu() {
           </>
         )}
       </aside>
+
+      {/* Checkout Animation Overlay */}
+      {showCheckoutAnimation && (
+        <div className="checkout-animation-overlay">
+          <Lottie
+            animationData={WalletAnimation}
+            loop={false} // Play once
+            autoplay={true}
+            style={{ width: 200, height: 200 }} // Adjust size as needed
+          />
+        </div>
+      )}
     </div>
   );
 }

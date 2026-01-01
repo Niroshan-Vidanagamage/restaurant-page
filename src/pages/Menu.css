@@ -148,3 +148,17 @@
     width: 100px; /* or any fixed width */
   }
 }
+
+/* Checkout Animation Overlay */
+.checkout-animation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050; /* Ensure it's above other content, similar to Bootstrap modals */
+}
