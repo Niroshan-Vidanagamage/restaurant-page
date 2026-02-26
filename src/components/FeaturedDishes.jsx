@@ -20,7 +20,7 @@ export function FeaturedDishes() {
                 <Card.Body className="text-center">
                   <Card.Title className="fs-5">{dish.name}</Card.Title>
                   <Card.Text className="text-success fw-bold">
-                    £{dish.price}
+                    ${dish.price}
                   </Card.Text>
                 </Card.Body>
               </Card>
