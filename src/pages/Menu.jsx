@@ -143,6 +143,14 @@ function Menu() {
             }
           } catch (parseErr) {
             console.error('Unable to parse checkout error response:', parseErr);
+            try {
+              const fallbackText = await response.text();
+              if (fallbackText) {
+                message = fallbackText;
+              }
+            } catch (textErr) {
+              console.error('Unable to read checkout error response text:', textErr);
+            }
           }
           throw new Error(message);
         }
