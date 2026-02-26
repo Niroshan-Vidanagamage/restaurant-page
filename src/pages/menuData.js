@@ -1,7 +1,7 @@
-import BreakfastImg from '../utils/img/breakfast.jpg';
-import LunchImg from '../utils/img/lunch.jpg';
-import DinnerImg from '../utils/img/dinner.jpg';
-import DessertImg from '../utils/img/dessert.jpg';
+import BreakfastImg from '../utils/img/compressed/breakfast.avif';
+import LunchImg from '../utils/img/compressed/lunch.avif';
+import DinnerImg from '../utils/img/compressed/dinner.avif';
+import DessertImg from '../utils/img/compressed/dessert.avif';
 
 export const menus = {
   Breakfast: {

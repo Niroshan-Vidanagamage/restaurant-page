@@ -1,12 +1,12 @@
 import React from 'react';
 import { MenuBtn } from '../components/MenuBtn';
 import './Home.css';
-import AboutImg from '../utils/img/about-img.jpg';
+import AboutImg from '../utils/img/compressed/about-img.avif';
 import { Link } from 'react-router-dom';
 import { ImageGallery } from '../components/ImageGallery';
 import { ContactInfo } from '../components/ContactInfo';
 import { FeaturedDishes } from '../components/FeaturedDishes';
-import ContactImage from '../utils/img/contact-img.jpg';
+import ContactImage from '../utils/img/compressed/contact-img.avif';
 
 function Home() {
     return (

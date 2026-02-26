@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Card, CardBody, CardText, CardFooter, CardTitle } from 'react-bootstrap';
 import './Reviews.css';
-import Person1 from '../utils/img/person1.jpg';
-import Person2 from '../utils/img/person2.jpg';
-import Person3 from '../utils/img/person3.jpg';
-import Person4 from '../utils/img/person4.jpg';
-import Person5 from '../utils/img/person1.jpg';
-import Person6 from '../utils/img/person2.jpg';
+import Person1 from '../utils/img/compressed/person1.avif';
+import Person2 from '../utils/img/compressed/person2.avif';
+import Person3 from '../utils/img/compressed/person3.avif';
+import Person4 from '../utils/img/compressed/person4.avif';
+import Person5 from '../utils/img/compressed/person1.avif';
+import Person6 from '../utils/img/compressed/person2.avif';
 
 const allReviews = [
     { img: Person1, name: "John Mike", text: "Lorem ipsum dolor sit amet consectetur adipisicing elit..." },

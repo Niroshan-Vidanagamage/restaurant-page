@@ -1,7 +1,7 @@
 import React from 'react';
 import './About.css';
-import AboutChef1 from '../utils/img/about-chef1.jpg';
-import AboutChef2 from '../utils/img/about-chef2.jpg';
+import AboutChef1 from '../utils/img/compressed/about-chef1.avif';
+import AboutChef2 from '../utils/img/compressed/about-chef2.avif';
 import { ImageGallery } from '../components/ImageGallery';
 import { Reviews } from '../components/Reviews';
 

@@ -4,7 +4,7 @@
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
     ),
-    url(../utils/img/menu-img.jpg);
+    url(../utils/img/compressed/menu-img.avif);
   height: 50vh;
   margin-top: 3rem;
 }
