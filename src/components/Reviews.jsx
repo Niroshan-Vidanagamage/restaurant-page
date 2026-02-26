@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, CardBody, CardText, CardFooter, CardTitle, Button } from 'react-bootstrap';
+import { Card, CardBody, CardText, CardFooter, CardTitle } from 'react-bootstrap';
 import './Reviews.css';
 import Person1 from '../utils/img/person1.jpg';
 import Person2 from '../utils/img/person2.jpg';
@@ -21,14 +21,6 @@ export function Reviews() {
     const [page, setPage] = useState(0);
     const perPage = 4;
     const maxPage = Math.ceil(allReviews.length / perPage) - 1;
-
-    const handleNext = () => {
-        if (page < maxPage) setPage(page + 1);
-    };
-
-    const handlePrev = () => {
-        if (page > 0) setPage(page - 1);
-    };
 
     const currentReviews = allReviews.slice(page * perPage, (page + 1) * perPage);
 
