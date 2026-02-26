@@ -9,7 +9,9 @@ import {
   CardTitle,
   Button,
   ListGroup,
-  ListGroupItem
+  ListGroupItem,
+  Toast,
+  ToastContainer
 } from 'react-bootstrap';
 
 import { menus } from './menuData';
@@ -52,6 +54,7 @@ function Menu() {
   const [showCheckoutAnimation, setShowCheckoutAnimation] = useState(false);
   const [isDesktop, setIsDesktop] = useState(() => getIsDesktop());
   const [isCartExpanded, setIsCartExpanded] = useState(() => !getIsDesktop());
+  const [showPaymentNotification, setShowPaymentNotification] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(DESKTOP_MEDIA_QUERY);
@@ -91,6 +94,9 @@ function Menu() {
     if (paymentStatus === 'success') {
       setCart([]);
       window.localStorage.removeItem('cart');
+      setShowPaymentNotification(true);
+    } else if (paymentStatus === 'cancel') {
+      setShowPaymentNotification(true);
     }
   }, [paymentStatus]);
 
@@ -164,22 +170,25 @@ function Menu() {
 
   return (
     <div className={`menu-page d-flex ${isDesktop ? 'desktop-cart-mode' : ''}`}>
+      <ToastContainer className="p-3" position="top-end" style={{ zIndex: 2000 }}>
+        <Toast
+          show={showPaymentNotification && (paymentStatus === 'success' || paymentStatus === 'cancel')}
+          onClose={() => setShowPaymentNotification(false)}
+          delay={3500}
+          autohide
+          bg={paymentStatus === 'success' ? 'success' : 'warning'}
+        >
+          <Toast.Header closeButton>
+            <strong className="me-auto">Payment Status</strong>
+          </Toast.Header>
+          <Toast.Body className={paymentStatus === 'success' ? 'text-white' : ''}>
+            {paymentStatus === 'success' ? 'Payment Sucessfull' : 'Payment was canceled.'}
+          </Toast.Body>
+        </Toast>
+      </ToastContainer>
+
       {/* ===== MENU LIST ===== */}
       <div className="menu-list flex-grow-1">
-        {paymentStatus === 'success' && (
-          <div className="container mt-5 mb-3">
-            <div className="alert alert-success" role="alert">
-              Payment Sucessfull
-            </div>
-          </div>
-        )}
-        {paymentStatus === 'cancel' && (
-          <div className="container mt-5 mb-3">
-            <div className="alert alert-warning" role="alert">
-              Payment was canceled.
-            </div>
-          </div>
-        )}
         <header className="mt-5 text-center">
           <h1 className='mb-0 text-white fw-bold'>Menu</h1>
         </header>
